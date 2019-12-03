@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1575391035 source:c:\users\magic\desktop\college\alg2019\openaddressinghashtables\open_address_table.cpp
+	"open_address_table.h"
+
+1575391051 c:\users\magic\desktop\college\alg2019\openaddressinghashtables\open_address_table.h
+	"record.h"
+	<stdio.h>
+	<string>
+
+1575391078 c:\users\magic\desktop\college\alg2019\openaddressinghashtables\record.h
+	<stdlib.h>
+	<string.h>
+
