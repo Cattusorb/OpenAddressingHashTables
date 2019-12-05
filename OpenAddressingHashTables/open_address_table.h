@@ -49,6 +49,8 @@ int find_empty_bucket(const HashTable*, const void*);
 
 // Used for lazy deletion
 Record* const DELETED = (Record*) malloc(sizeof(Record));
-
+Record* const EMPTY = (Record*) malloc(sizeof(Record));
+int const TABLE_FULL = -1;
+int const NOT_FOUND = -1;
 
 #endif

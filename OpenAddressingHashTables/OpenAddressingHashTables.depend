@@ -11,3 +11,27 @@
 	<stdlib.h>
 	<string.h>
 
+1575564625 source:m:\algorithms2019\openaddressinghashtables\main.cpp
+	"table_tests.h"
+
+1575560638 m:\algorithms2019\openaddressinghashtables\table_tests.h
+	"open_address_table.h"
+
+1575562619 m:\algorithms2019\openaddressinghashtables\open_address_table.h
+	"record.h"
+	<stdio.h>
+	<string>
+
+1575560637 m:\algorithms2019\openaddressinghashtables\record.h
+	<stdlib.h>
+	<string.h>
+
+1575564430 source:m:\algorithms2019\openaddressinghashtables\open_address_table.cpp
+	"open_address_table.h"
+
+1575560637 source:m:\algorithms2019\openaddressinghashtables\record.cpp
+	"record.h"
+
+1575563713 source:m:\algorithms2019\openaddressinghashtables\table_tests.cpp
+	"table_tests.h"
+

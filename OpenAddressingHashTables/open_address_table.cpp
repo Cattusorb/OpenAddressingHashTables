@@ -88,28 +88,32 @@ char* table_to_string(const HashTable* table) {
  * returns: the index of the bucket containing the desired key value
  */
 int find_bucket(const HashTable* table, const void* key) {
+    if (table == NULL || key == NULL)
+    {
+        return NOT_FOUND;
+    }
 	int attempts = 0;
 	while (attempts < table->N)
     {
-        i = (table.hash_function(k) + attempts) % table.buckets; // fix
+        int i = (table->hash_function(key) + attempts) % table->N;
 
-        if (table.buckets[i] == empty)
+        if (table->buckets[i] == NULL)
         {
-            return -1;
+            return NOT_FOUND;
         }
-        if (table.buckets[i]) == DELETED)
+        if (table->buckets[i] == DELETED)
         {
             attempts = attempts + 1;
             continue;
         }
-        if (table.buckets[i].key) == k)
+        if (table->buckets[i]->key == key) // seg fault here
         {
             return attempts;
         }
 
         attempts = attempts + 1;
     }
-	return -1; // -1 == NOT_FOUND
+	return NOT_FOUND;
 }
 
 /*
@@ -123,29 +127,25 @@ int find_bucket(const HashTable* table, const void* key) {
  * returns: the bucket number if the key is found or -1 if it isn't
  */
 int find_empty_bucket(const HashTable* table, const void* key) {
+    if (table == NULL || key == NULL)
+    {
+        return NOT_FOUND;
+    }
     int attempts = 0;
     // why does this function have a key to find? should
     // it just find the next empty bucket?
 	while (attempts < table->N)
     {
-        i = (table.hash_function(k) + attempts) % table.buckets; // fix
+        int i = (table->hash_function(key) + attempts) % table->N;
 
-        if (table.buckets[i] == empty)
+        if (table->buckets[i] == NULL || table->buckets[i] == DELETED)
         {
-            return attempts;
-        }
-        if (table.buckets[i]) == DELETED)
-        {
-            return attempts;
-        }
-        if (table.buckets[i].key) == k)
-        {
-            return attempts;
+            return i;
         }
 
         attempts = attempts + 1;
     }
-	return -1; // -1 == NOT_FOUND
+	return TABLE_FULL;
 }
 
 
@@ -159,8 +159,21 @@ int find_empty_bucket(const HashTable* table, const void* key) {
  *
  */
 bool insert(HashTable* table, const void* key, const void* value) {
-	// TODO - implement
-	return false;
+    if (table == NULL || key == NULL || value == NULL)
+    {
+        return false;
+    }
+	Record* r = create_record(key, table->key_size, value, table->value_size);
+	int i = find_empty_bucket(table, key);
+
+	if (i != TABLE_FULL)
+    {
+        table->buckets[i] = r;
+        return true;
+	} else
+	{
+	    return false;
+	}
 }
 
 /*
@@ -173,13 +186,17 @@ bool insert(HashTable* table, const void* key, const void* value) {
  * returns: the value or NULL if key is not in table
  */
 void* search(const HashTable* table, const void* key) {
+    if (table == NULL || key == NULL)
+    {
+        return NULL;
+    }
 	int i = find_bucket(table, key);
-	if (i == -1)
+	if (i == NOT_FOUND)
 	{
-	    return null;
+	    return NULL;
 	} else
 	{
-	    return table.buckets[i].value;
+	    return table->buckets[i]->value;
 	}
 	return NULL;
 }
@@ -194,8 +211,19 @@ void* search(const HashTable* table, const void* key) {
  *
  */
 bool replace(HashTable* table, const void* key, const void* new_value) {
-	// TODO - implement
-	return false;
+    if (table == NULL || key == NULL || new_value == NULL)
+    {
+        return false;
+    }
+	int i = find_bucket(table, key);
+	if (i == NOT_FOUND)
+    {
+        return false;
+    } else
+    {
+        memcpy(table->buckets[i]->value, new_value, table->value_size);
+        return true;
+    }
 }
 
 /*
@@ -207,6 +235,17 @@ bool replace(HashTable* table, const void* key, const void* new_value) {
  *
  */
 bool remove(HashTable* table, const void* key) {
-	// TODO - implement
-	return false;
+    if (table == NULL || key == NULL)
+    {
+        return false;
+    }
+	int i = find_bucket(table, key);
+	if (i == NOT_FOUND)
+    {
+        return false;
+    } else
+    {
+        memcpy(table->buckets[i]->value, DELETED, table->value_size);
+        return true;
+    }
 }
