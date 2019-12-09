@@ -106,7 +106,7 @@ int find_bucket(const HashTable* table, const void* key) {
             attempts = attempts + 1;
             continue;
         }
-        if (table->buckets[i]->key == key) // seg fault here
+        if (table->compare(table->buckets[i]->key, key) == 0)
         {
             return attempts;
         }

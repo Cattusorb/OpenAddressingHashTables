@@ -35,3 +35,24 @@
 1575563713 source:m:\algorithms2019\openaddressinghashtables\table_tests.cpp
 	"table_tests.h"
 
+1575910366 source:c:\users\magic\desktop\college\fall 2019\algorithms & data structures\openaddressinghashtables\main.cpp
+	"table_tests.h"
+
+1575910366 c:\users\magic\desktop\college\fall 2019\algorithms & data structures\openaddressinghashtables\table_tests.h
+	"open_address_table.h"
+
+1575910366 c:\users\magic\desktop\college\fall 2019\algorithms & data structures\openaddressinghashtables\open_address_table.h
+	"record.h"
+	<stdio.h>
+	<string>
+
+1575910366 c:\users\magic\desktop\college\fall 2019\algorithms & data structures\openaddressinghashtables\record.h
+	<stdlib.h>
+	<string.h>
+
+1575910366 source:c:\users\magic\desktop\college\fall 2019\algorithms & data structures\openaddressinghashtables\record.cpp
+	"record.h"
+
+1575910366 source:c:\users\magic\desktop\college\fall 2019\algorithms & data structures\openaddressinghashtables\table_tests.cpp
+	"table_tests.h"
+
